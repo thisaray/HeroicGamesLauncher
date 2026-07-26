@@ -174,15 +174,19 @@ export default function SteamGridDBPicker({
 
       {!loading && grids.length > 0 && (
         <div className="SteamGridDBPicker__grids">
-          {grids.map((grid) => (
-            <div
-              key={grid.id}
-              className="SteamGridDBPicker__grid-item"
-              onClick={() => onSelect(grid.url)}
-            >
-              <CachedImage src={grid.thumb} />
-            </div>
-          ))}
+          {grids.map((grid) => {
+            const isAnimated =
+              grid.mime === 'image/gif' || grid.mime === 'image/webp'
+            return (
+              <div
+                key={grid.id}
+                className="SteamGridDBPicker__grid-item"
+                onClick={() => onSelect(grid.url)}
+              >
+                <CachedImage src={isAnimated ? grid.url : grid.thumb} />
+              </div>
+            )
+          })}
         </div>
       )}
     </div>

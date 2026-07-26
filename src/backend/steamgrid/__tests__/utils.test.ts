@@ -78,7 +78,7 @@ describe('SteamGridDB Utils', () => {
       expect(mockedAxios.get).toHaveBeenCalledWith(
         'https://www.steamgriddb.com/api/v2/grids/game/123',
         {
-          params: {},
+          params: { types: 'static,animated' },
           headers: {
             Authorization: `Bearer ${apiKey}`,
             'User-Agent': userAgent
@@ -104,6 +104,7 @@ describe('SteamGridDB Utils', () => {
         expect.any(String),
         expect.objectContaining({
           params: {
+            types: 'static,animated',
             dimensions: '460x215,920x430',
             styles: 'alternate,blurred'
           }

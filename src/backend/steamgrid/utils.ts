@@ -53,7 +53,7 @@ export async function getGrids(
     styles?: string[]
   }
 ): Promise<SGDBGrid[]> {
-  const params: Record<string, string> = {}
+  const params: Record<string, string> = { types: 'static,animated' }
   if (args.dimensions && args.dimensions.length > 0) {
     params.dimensions = args.dimensions.join(',')
   }
@@ -90,7 +90,7 @@ export async function getHeroes(
     styles?: string[]
   }
 ): Promise<SGDBGrid[]> {
-  const params: Record<string, string> = {}
+  const params: Record<string, string> = { types: 'static,animated' }
   if (args.dimensions && args.dimensions.length > 0) {
     params.dimensions = args.dimensions.join(',')
   }

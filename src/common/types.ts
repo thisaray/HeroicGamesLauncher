@@ -863,6 +863,7 @@ export interface SGDBGrid {
   id: number
   url: string
   thumb: string
+  mime?: string
 }
 
 export interface SGDBGame {
