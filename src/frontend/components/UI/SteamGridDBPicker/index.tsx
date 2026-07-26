@@ -24,6 +24,8 @@ interface Props {
 const DEFAULT_GRID_DIMENSIONS = ['600x900', '342x482', '660x930']
 const DEFAULT_GRID_STYLES = ['material', 'alternate', 'blurred']
 
+const isVideoThumb = (thumb: string) => /\.(webm|mp4)(\?|#|$)/i.test(thumb)
+
 export default function SteamGridDBPicker({
   initialTitle,
   onSelect,
@@ -174,19 +176,29 @@ export default function SteamGridDBPicker({
 
       {!loading && grids.length > 0 && (
         <div className="SteamGridDBPicker__grids">
-          {grids.map((grid) => {
-            const isAnimated =
-              grid.mime === 'image/gif' || grid.mime === 'image/webp'
-            return (
-              <div
-                key={grid.id}
-                className="SteamGridDBPicker__grid-item"
-                onClick={() => onSelect(grid.url)}
-              >
-                <CachedImage src={isAnimated ? grid.url : grid.thumb} />
-              </div>
-            )
-          })}
+          {grids.map((grid) => (
+            <div
+              key={grid.id}
+              className="SteamGridDBPicker__grid-item"
+              onClick={() => onSelect(grid.url)}
+            >
+              {isVideoThumb(grid.thumb) ? (
+                // previews are short, muted loops - stream them straight from
+                // the CDN rather than filling the image cache with them
+                <video
+                  src={grid.thumb}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  disablePictureInPicture
+                />
+              ) : (
+                <CachedImage src={grid.thumb} />
+              )}
+            </div>
+          ))}
         </div>
       )}
     </div>

@@ -86,10 +86,12 @@
       outline: 2px solid var(--primary);
     }
 
-    img {
+    img,
+    video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
   }
 
