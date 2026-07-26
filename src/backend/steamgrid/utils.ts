@@ -12,6 +12,9 @@ interface SGDBResponse<T> {
 
 const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeroicGamesLauncher/${app.getVersion()}`
 
+// SteamGridDB asset types
+const ASSET_TYPES = 'static,animated'
+
 /**
  * Search for a game using autocomplete.
  * @param apiKey SteamGridDB API Key
@@ -53,7 +56,7 @@ export async function getGrids(
     styles?: string[]
   }
 ): Promise<SGDBGrid[]> {
-  const params: Record<string, string> = { types: 'static,animated' }
+  const params: Record<string, string> = { types: ASSET_TYPES }
   if (args.dimensions && args.dimensions.length > 0) {
     params.dimensions = args.dimensions.join(',')
   }
@@ -90,7 +93,7 @@ export async function getHeroes(
     styles?: string[]
   }
 ): Promise<SGDBGrid[]> {
-  const params: Record<string, string> = { types: 'static,animated' }
+  const params: Record<string, string> = { types: ASSET_TYPES }
   if (args.dimensions && args.dimensions.length > 0) {
     params.dimensions = args.dimensions.join(',')
   }
